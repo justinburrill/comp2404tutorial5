@@ -15,17 +15,18 @@ TAArray::TAArray() {
 TAArray::~TAArray() { delete[] elements; }
 
 bool TAArray::add(TextArea *s) {
-	if (this->size >= MAX_COMPONENTS) {
+	if (this->isFull()) {
 		return false;
 	}
-	this->elements[this->size++] = s;
+	this->elements[this->size] = s;
+	this->size += 1;
 
 	return true;
 }
 
 bool TAArray::add(TextArea *s, int index) {
 	cout << "Adding to index " << index << endl;
-	if (this->size >= MAX_COMPONENTS || index < 0 || index > this->size) {
+	if (this->isFull() || index < 0 || index > this->size) {
 		return false;
 	}
 
@@ -34,6 +35,8 @@ bool TAArray::add(TextArea *s, int index) {
 	}
 
 	this->elements[index] = s;
+
+	this->size += 1;
 	return true;
 }
 
